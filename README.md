@@ -4,7 +4,7 @@
 
 An end-to-end data analytics project analyzing retail customer purchasing behavior, revenue performance, customer segmentation, product performance, discounts, shipping preferences, and subscription behavior.
 
-The project demonstrates a complete analytics workflow using **Python, Pandas, PostgreSQL, SQL, and Tableau**, transforming raw customer transaction data into structured analysis, business insights, and interactive visualizations.
+The project demonstrates a complete analytics workflow using **Python, Pandas, PostgreSQL, SQL, and Matplotlib/Seaborn**, transforming raw customer transaction data into structured analysis, business insights, and visualizations.
 
 ---
 
@@ -25,7 +25,7 @@ The objective of this project is to analyze customer purchase behavior and ident
 
 The project follows an end-to-end analytical workflow:
 
-**Raw Data → Data Cleaning & Preparation → PostgreSQL → SQL Analysis → Business Insights → Tableau Visualization**
+**Raw Data → Data Cleaning & Preparation → PostgreSQL → SQL Analysis → Business Insights → Python (Matplotlib/Seaborn) Visualization**
 
 ---
 
@@ -39,7 +39,7 @@ The project follows an end-to-end analytical workflow:
 - Identified **3,116 Loyal, 701 Returning, and 83 New customers**.
 - Compared subscriber and non-subscriber customer behavior using customer count, average spend, and total revenue.
 - Analyzed the relationship between discounts, shipping types, product ratings, purchasing behavior, and subscription status.
-- Built Tableau visualizations to communicate customer segmentation and subscription insights.
+- Built Matplotlib/Seaborn visualizations to communicate customer segmentation and subscription insights.
 
 ---
 
@@ -166,17 +166,33 @@ Customer subscription behavior was analyzed by comparing subscriber and non-subs
 - Total revenue
 - Purchasing behavior
 
-The Tableau dashboard includes a **Subscription Status** visualization showing a:
+A **Subscription Status** donut chart shows a:
 
 **73% vs 27% distribution**
 
-using a donut visualization.
+between non-subscribers and subscribers (see [Visualizations](#visualizations) below).
 
 ---
 
-## Tableau Dashboard
+## Visualizations
 
-The project includes Tableau visualizations designed to communicate analytical findings in a business-friendly format.
+Charts answering each of the 10 SQL business questions (plus two summary views) were generated with **Matplotlib/Seaborn** via [`generate_visuals.py`](generate_visuals.py) and exported to [`visuals/`](visuals/).
+
+| | |
+|---|---|
+| ![Revenue by Gender](visuals/01_revenue_by_gender.png) | ![Revenue by Category](visuals/11_revenue_by_category.png) |
+| ![Customer Segmentation](visuals/07_customer_segmentation.png) | ![Subscription Status](visuals/12_subscription_status_donut.png) |
+| ![Subscriber vs Non-Subscriber](visuals/05_subscriber_comparison.png) | ![Revenue by Age Group](visuals/10_revenue_by_age_group.png) |
+| ![Top 5 Rated Products](visuals/03_top5_rated_products.png) | ![Top 5 Discounted Products](visuals/06_top5_discount_rate_products.png) |
+| ![Shipping Type Avg Purchase](visuals/04_shipping_type_avg_purchase.png) | ![Repeat Buyers Subscription](visuals/09_repeat_buyers_subscription.png) |
+| ![Discount Users Above Average Spend](visuals/02_discount_above_average_spend.png) | ![Top 3 Products per Category](visuals/08_top3_products_per_category.png) |
+
+To regenerate the charts from the raw CSV:
+
+```bash
+pip install pandas matplotlib seaborn
+python3 generate_visuals.py
+```
 
 ---
 
@@ -196,7 +212,8 @@ The project includes Tableau visualizations designed to communicate analytical f
 
 ### Data Visualization
 
-- Tableau
+- Matplotlib
+- Seaborn
 
 ### Development Environment
 
@@ -211,21 +228,9 @@ The project includes Tableau visualizations designed to communicate analytical f
 ```text
 retail-purchase-insights/
 │
-├── data/
-│   └── Raw and processed datasets
-│
-├── notebooks/
-│   └── Retail_Purchase_insight.ipynb
-│
-├── sql/
-│   └── PostgreSQL schema and analytical queries
-│
-├── src/
-│   └── Python data preparation and database-loading scripts
-│
-├── dashboards/
-│   └── Tableau workbook / dashboard files
-│
-├── requirements.txt
-│
+├── customer_shopping_behavior.csv     Raw dataset
+├── Retail_Purchase_insight.ipynb      Data cleaning & preparation (Python/Pandas)
+├── customer_behavior:PostgreSQL.sql   PostgreSQL business-question queries
+├── generate_visuals.py                Matplotlib/Seaborn chart generation
+├── visuals/                           Generated PNG chart exports
 └── README.md
